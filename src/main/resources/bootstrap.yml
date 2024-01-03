@@ -1,0 +1,14 @@
+server:
+  port: 20703
+  servlet:
+    context-path: /async
+
+spring:
+  application:
+    name: async
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
