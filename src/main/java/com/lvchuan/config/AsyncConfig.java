@@ -1,9 +1,9 @@
-package org.example.config;
+package com.lvchuan.config;
 
+import com.lvchuan.aysnc.AsyncDTO;
+import com.lvchuan.aysnc.AsyncEnable;
+import com.lvchuan.aysnc.AsyncProxyUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.example.aysnc.AsyncDTO;
-import org.example.aysnc.AsyncEnable;
-import org.example.aysnc.AsyncProxyUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
