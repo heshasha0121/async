@@ -49,11 +49,6 @@ public class DynamicExportFactory {
     private AsyncProxyUtil asyncProxyUtil;
 
     /**
-     * 导出文件地址
-     */
-    @Value("${file.export.host:https://erp-export-file.oss-cn-hangzhou.aliyuncs.com}")
-    private String fileExportHost;
-    /**
      * 导出文件最大条数
      */
     @Value("${file.export.max.num: 500000}")
