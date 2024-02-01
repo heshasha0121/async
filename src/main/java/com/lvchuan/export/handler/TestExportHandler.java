@@ -21,7 +21,7 @@ import java.util.*;
 @Slf4j
 public class TestExportHandler implements IDynamicExportHandler<QueryPageReq> {
 
-    private static final String FILE_NAME = "溯源信息导出";
+    private static final String FILE_NAME = "文件信息导出";
 
     @Override
     public ExportTemplateBizTypeEnum bizType() {
