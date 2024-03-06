@@ -1,11 +1,11 @@
-package com.lvchuan.config;
+package com.lvchuan.common.config;
 
-import com.lvchuan.aysnc.AsyncDTO;
-import com.lvchuan.aysnc.AsyncEnable;
-import com.lvchuan.aysnc.AsyncProxyUtil;
+import com.lvchuan.common.aysnc.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
@@ -25,7 +25,6 @@ import java.util.Map;
 public class AsyncConfig implements CommandLineRunner {
     @Resource
     private ApplicationContext applicationContext;
-
     @Override
     public void run(String... args) throws Exception {
         Map<String, Object> asyncClass = this.applicationContext.getBeansWithAnnotation(AsyncEnable.class);
@@ -47,5 +46,16 @@ public class AsyncConfig implements CommandLineRunner {
             }
             AsyncProxyUtil.asyncMethod.put(clazz.getName(), methodDtoMap);
         }
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AsyncHandler asyncHandler() {
+        return new DefaultAsyncHandler();
+    }
+
+    @Bean
+    public AsyncProxyUtil asyncProxyUtil() {
+        return new AsyncProxyUtil();
     }
 }

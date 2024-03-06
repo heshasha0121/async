@@ -1,4 +1,4 @@
-package com.lvchuan.aysnc;
+package com.lvchuan.common.aysnc;
 
 import lombok.Data;
 
