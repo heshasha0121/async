@@ -22,9 +22,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @description feign开发环境动态修改访问地址
  * @date 2023/5/8 09:09:07
  */
-//@PropertySource(value = "classpath:/feign-dev.properties")
-//@ConfigurationProperties(prefix = "feign")
-//@Component
+@PropertySource(value = "classpath:/feign-dev.properties")
+@ConfigurationProperties(prefix = "feign")
+@Component
 @Slf4j
 public class FeignClientsBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
     private Map<String,String> urlMap;
