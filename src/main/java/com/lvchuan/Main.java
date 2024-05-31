@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
  * @author: lvchuan
  * @createTime: 2024-01-03 13:44
  */
-@SpringBootApplication()
+@SpringBootApplication(scanBasePackages = "com.lvchuan")
 @EnableCaching
 public class Main {
     public static void main(String[] args) {

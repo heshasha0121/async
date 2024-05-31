@@ -1,22 +1,23 @@
-package com.lvchuan.export;
+package com.lvchuan.imports;
 
 import com.lvchuan.common.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @description: 溯源导出模板
+ * @description: 导入模板枚举
  * @author: lvchuan
- * @createTime: 2023-12-06 11:17
+ * @createTime: 2024-05-29 10:18
  */
 @AllArgsConstructor
 @Getter
-public enum ExportTemplateBizTypeEnum implements BaseEnum {
+public enum ImportTemplateBizType implements BaseEnum {
     /**
-     * 测试导出
+     * 测试导入
      */
-    TEST(1, "测试导出"),
+    TEST(1, "测试导入"),
     ;
+
     private Integer code;
     private String desc;
 }

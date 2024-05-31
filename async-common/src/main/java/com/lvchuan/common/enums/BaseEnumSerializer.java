@@ -1,4 +1,4 @@
-package com.lvchuan.enums;
+package com.lvchuan.common.enums;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

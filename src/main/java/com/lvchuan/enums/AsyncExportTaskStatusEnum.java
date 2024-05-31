@@ -1,5 +1,6 @@
 package com.lvchuan.enums;
 
+import com.lvchuan.common.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

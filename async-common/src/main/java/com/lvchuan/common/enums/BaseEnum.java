@@ -1,4 +1,4 @@
-package com.lvchuan.enums;
+package com.lvchuan.common.enums;
 
 /**
  * @author lvchuan
