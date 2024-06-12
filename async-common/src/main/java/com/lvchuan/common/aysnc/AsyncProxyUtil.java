@@ -23,7 +23,7 @@ public class AsyncProxyUtil implements MethodInterceptor {
     public static Map<String, Map<String, AsyncDTO>> asyncMethod = new HashMap<>();
 
     @Resource
-    private AsyncHandler asyncHandler;
+    private AsyncSendHandler asyncSendHandler;
 
     public <T> T proxy(T t) {
         Enhancer enhancer = new Enhancer();
@@ -73,7 +73,7 @@ public class AsyncProxyUtil implements MethodInterceptor {
 
         log.info("发送消息：{}", JSON.toJSONString(asyncMsgDTO));
         //消息发送
-        asyncHandler.sendMsg(asyncMsgDTO);
+        asyncSendHandler.sendMsg(asyncMsgDTO);
         return null;
     }
 }

@@ -1,0 +1,23 @@
+server:
+  port: 20703
+  servlet:
+    context-path: /async
+
+spring:
+  application:
+    name: async
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+rocketmq:
+  name-server: 127.0.0.1:9876 # 访问地址
+  producer:
+    group: async_group # 必须指定group
+    send-message-timeout: 3000 # 消息发送超时时长，默认3s
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+

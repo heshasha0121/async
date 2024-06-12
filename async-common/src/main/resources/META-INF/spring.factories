@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.lvchuan.common.config.AsyncConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\com.lvchuan.common.aysnc.AsyncHandlerConfig,\
+  \com.lvchuan.common.jackson.JacksonConfig
+
