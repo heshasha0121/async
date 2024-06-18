@@ -110,6 +110,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <modules>
         <module>async-common</module>
         <module>async-Infrastructure</module>
