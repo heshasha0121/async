@@ -110,4 +110,10 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <modules>
+        <module>async-common</module>
+        <module>async-Infrastructure</module>
+        <module>async-trigger</module>
+        <module>async-web</module>
+    </modules>
 </project>
