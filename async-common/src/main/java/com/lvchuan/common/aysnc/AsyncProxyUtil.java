@@ -1,12 +1,16 @@
 package com.lvchuan.common.aysnc;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.context.ApplicationContext;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -24,6 +28,8 @@ public class AsyncProxyUtil implements MethodInterceptor {
 
     @Resource
     private AsyncSendHandler asyncSendHandler;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     public <T> T proxy(T t) {
         Enhancer enhancer = new Enhancer();
@@ -36,10 +42,10 @@ public class AsyncProxyUtil implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         Map<String, AsyncDTO> proxyMethodList = AsyncProxyUtil.asyncMethod.get(method.getDeclaringClass().getName());
         if (Objects.isNull(proxyMethodList) || CollectionUtils.isEmpty(proxyMethodList)) {
-            return methodProxy.invokeSuper(o, objects);
+            return this.executeSpringMethod(method, objects);
         }
         if (Objects.isNull(proxyMethodList.get(method.getName()))) {
-            return methodProxy.invokeSuper(o, objects);
+            return this.executeSpringMethod(method, objects);
         }
         Parameter[] parameters = method.getParameters();
         if (Objects.isNull(parameters) || parameters.length == 0) {
@@ -54,7 +60,12 @@ public class AsyncProxyUtil implements MethodInterceptor {
             } else {
                 asyncParamDTO.setValue(objects[i]);
             }
+            String type = parameters[i].getType().getName();
+            String sourceType = objects[i].getClass().getName();
             asyncParamDTO.setType(parameters[i].getType().getName());
+            if (!StrUtil.equals(type, sourceType)) {
+                asyncParamDTO.setSourceType(objects[i].getClass().getName());
+            }
             if (parameters[i].isAnnotationPresent(AsyncBizCode.class)) {
                 bizCode = String.valueOf(objects[i]);
             }
@@ -75,5 +86,20 @@ public class AsyncProxyUtil implements MethodInterceptor {
         //消息发送
         asyncSendHandler.sendMsg(asyncMsgDTO);
         return null;
+    }
+
+    /**
+     * 执行spring的方法，否则会执行本地方法
+     */
+    public Object executeSpringMethod(Method oldMethod,Object[] param) {
+        Class[] classArr = new Class[param.length];
+        if (param != null && param.length > 0) {
+            for (int i = 0; i < param.length; i++) {
+                classArr[i] = param[i].getClass();
+            }
+        }
+        Class clazz = oldMethod.getDeclaringClass();
+        Object object = applicationContext.getBean(clazz);
+        return ReflectionUtils.invokeMethod(oldMethod, object, param);
     }
 }

@@ -10,7 +10,15 @@ import lombok.Data;
 @Data
 public class AsyncParamDTO {
 
+    /**
+     * 方法类型
+     */
     private String type;
+
+    /**
+     * 源类型
+     */
+    private String sourceType;
 
     private Object value;
 }

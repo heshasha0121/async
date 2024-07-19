@@ -1,8 +1,11 @@
 package com.lvchuan.common.aysnc;
 
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.CollectionUtils;
@@ -23,6 +26,8 @@ import java.util.*;
 public class AsyncAcceptHandler {
     @Resource
     private ApplicationContext applicationContext;
+    @Resource
+    private ObjectMapper objectMapper;
 
     /**
      * 消息返回后处理数据
@@ -62,6 +67,10 @@ public class AsyncAcceptHandler {
                 for (int i = 0; i < parameters.length; i++) {
                     Object value = dto.getParamList().get(i).getValue();
                     Class<?> paramClass = parameters[i].getType();
+                    Class<?> sourceType = null;
+                    if (StrUtil.isNotBlank(dto.getParamList().get(i).getSourceType())) {
+                        sourceType = ClassUtil.loadClass(dto.getParamList().get(i).getSourceType(), false);
+                    }
                     if (Objects.isNull(value)) {
                         param[i] = null;
                     } else if (paramClass == Long.class) {
@@ -94,7 +103,11 @@ public class AsyncAcceptHandler {
                     } else if (paramClass == Date.class) {
                         param[i] = new Date( Long.parseLong(String.valueOf(value)));
                     } else {
-                        param[i] = JSONObject.toJavaObject((JSONObject) value, paramClass);
+                        if (Objects.nonNull(sourceType)) {
+                            param[i] = objectMapper.readValue(String.valueOf(value), sourceType);
+                        } else {
+                            param[i] = objectMapper.readValue(String.valueOf(value), paramClass);
+                        }
                     }
                 }
             }
