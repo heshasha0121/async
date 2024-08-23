@@ -12,16 +12,15 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 /**
- * @description: mq公共消费者
+ * @description: rocketmq
  * @author: lvchuan
- * @createTime: 2024-06-12 14:21
+ * @createTime: 2024-08-22 17:22
  */
 @Component
 @Slf4j
-@RocketMQMessageListener(topic = MqTopicConstant.common_topic, consumerGroup = MqTopicConstant.common_group, selectorExpression = MqTopicConstant.common_tag)
-public class MQCommonConsumerService implements RocketMQListener<MessageExt> {
+@RocketMQMessageListener(topic = MqTopicConstant.canal_topic, consumerGroup = MqTopicConstant.canal_group, selectorExpression = MqTopicConstant.canal_tag)
+public class RocketCanalClient implements RocketMQListener<MessageExt> {
     @Autowired
     private AsyncAcceptHandler asyncAcceptHandler;
 

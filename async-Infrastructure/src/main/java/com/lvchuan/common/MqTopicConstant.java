@@ -12,4 +12,10 @@ public class MqTopicConstant {
 
     public final static String common_tag = "common_topic_tag";
 
+    public final static String canal_topic = "canal_topic";
+
+    public final static String canal_group = "canal_group";
+
+    public final static String canal_tag = "canal_topic_tag";
+
 }
