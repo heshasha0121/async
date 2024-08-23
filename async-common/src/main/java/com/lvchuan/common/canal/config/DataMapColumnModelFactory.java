@@ -59,7 +59,7 @@ public class DataMapColumnModelFactory implements IModelFactory<Map<String, Stri
     }
 
     /**
-     * 获取字段名称，主要是下划线转驼峰命名法，由于实体和表字段明明方式可能不一致
+     * 获取字段名称，主要是下划线转驼峰命名法，由于实体和表字段命名方式可能不一致
      * @param columnNames
      * @param entry
      * @return
