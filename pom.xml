@@ -23,7 +23,7 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <projectlombok.version>1.18.16</projectlombok.version>
         <fastjson.version>1.2.72</fastjson.version>
-        <commons.version>3.1</commons.version>
+        <commons.version>3.12.0</commons.version>
         <jackson.version>2.11.4</jackson.version>
         <junit.version>4.13.1</junit.version>
     </properties>
