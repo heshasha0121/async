@@ -11,6 +11,7 @@ import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import top.javatool.canal.client.handler.MessageHandler;
 
 /**
  * @description: rocketmq
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
 @RocketMQMessageListener(topic = MqTopicConstant.canal_topic, consumerGroup = MqTopicConstant.canal_group, selectorExpression = MqTopicConstant.canal_tag)
 public class RocketCanalClient implements RocketMQListener<MessageExt> {
     @Autowired
-    private AsyncAcceptHandler asyncAcceptHandler;
+    private MessageHandler messageHandler;
 
     @Override
     public void onMessage(MessageExt messageExt) {
@@ -31,7 +32,7 @@ public class RocketCanalClient implements RocketMQListener<MessageExt> {
         log.info("[{}]监听到消息：msg:{}", messageExt.getMsgId(), msg);
         if (StrUtil.isNotBlank(msg)) {
             AsyncMsgDTO data = JSON.parseObject(msg, AsyncMsgDTO.class);
-            asyncAcceptHandler.handleMsg(data);
+            messageHandler.handleMessage(data);
         }
     }
 }
