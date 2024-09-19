@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.lvchuan.common.exception.BusinessException;
 import com.lvchuan.common.web.ResultEnum;
+import com.lvchuan.utils.ClassUtils;
 import com.lvchuan.utils.ValidateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.BooleanUtils;
@@ -39,6 +40,7 @@ public class ImportFactory implements InitializingBean {
         }
         IImportHandler currentHandler = ImportFactory.handlerMap.get(type);
         ImportTemplateConfigDTO currentConfig = ImportFactory.configMap.get(type);
+        Class objClass = ClassUtils.getGenericInterfacesClass(currentHandler, 0);
         if (Objects.isNull(currentHandler)) {
             log.warn("[{}]对应枚举没有实现类", type);
             return;
@@ -46,7 +48,7 @@ public class ImportFactory implements InitializingBean {
         List dataList = null;
         try {
             dataList = EasyExcel.read(uploadFile.getInputStream())
-                    .head(currentConfig.getClazz())
+                    .head(objClass)
                     .sheet(0)
                     .headRowNumber(currentConfig.getHeadRowNum())
                     .doReadSync();

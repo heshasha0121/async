@@ -11,13 +11,10 @@ import lombok.Data;
 @Data
 @Builder
 public class ImportTemplateConfigDTO {
-    /**
-     * 模板class
-     */
-    private Class clazz;
 
     /**
      * 头行数 默认一行
      */
+    @Builder.Default
     private int headRowNum = 1;
 }

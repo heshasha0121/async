@@ -23,14 +23,6 @@ public class TestImportService implements IImportHandler<TestImportModel> {
     }
 
     @Override
-    public ImportTemplateConfigDTO buildConfig() {
-        return ImportTemplateConfigDTO
-                .builder()
-                .clazz(TestImportModel.class)
-                .build();
-    }
-
-    @Override
     public void handleData(List<TestImportModel> dataList) {
         log.info("业务处理数据");
     }
