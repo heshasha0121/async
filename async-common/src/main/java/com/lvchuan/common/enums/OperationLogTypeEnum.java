@@ -25,7 +25,11 @@ public enum OperationLogTypeEnum implements BaseEnum {
     /**
      * 新增
      */
-    ADD(3, "新增");
+    ADD(3, "新增"),
+    /**
+     * 删除
+     */
+    DELETE(4, "删除");
 
     @EnumValue
     private Integer code;
