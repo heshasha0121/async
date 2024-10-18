@@ -1,8 +1,10 @@
 package com.lvchuan;
 
+import org.redisson.spring.starter.RedissonAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
@@ -13,7 +15,7 @@ import org.springframework.cache.annotation.EnableCaching;
  * @createTime: 2024-01-03 13:44
  */
 @SpringBootApplication(scanBasePackages = "com.lvchuan",
-        exclude = {DataSourceAutoConfiguration.class, MongoAutoConfiguration.class})
+        exclude = {DataSourceAutoConfiguration.class, MongoAutoConfiguration.class, RedisAutoConfiguration.class, RedissonAutoConfiguration.class})
 @EnableCaching
 public class WebMain {
     public static void main(String[] args) {

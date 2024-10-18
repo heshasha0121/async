@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedissonUtils {
 
-    @Resource
+    //todo 需要一个redis
+    //@Resource
     private RedissonClient redissonClient;
 
     public static final Long DEFAULT_WAIT_MILL_SECOND_TIME = 200L;
