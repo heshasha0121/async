@@ -40,14 +40,6 @@ public @interface SimpleRedisLockMethod {
     String obtainLockErrMsg() default "";
 
     /**
-     * redis key是否自动添加租户条件，默认值为true
-     * true key自动带上租户条件 {tenantCode}:{key}，如果没有查询到租户code，将不会加锁
-     * false key不带租户条件
-     * @return 是否带上租户条件
-     */
-    boolean autoTenantOfKey() default true;
-
-    /**
      * 锁key前缀
      * @return
      */
