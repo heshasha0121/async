@@ -4,10 +4,12 @@ import cn.hutool.core.util.ReflectUtil;
 import com.baomidou.mybatisplus.core.conditions.AbstractLambdaWrapper;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.ISqlSegment;
+import com.baomidou.mybatisplus.core.conditions.SharedString;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -38,16 +40,26 @@ public class CustomerQueryChainWrapper<T> extends AbstractChainWrapper<T, SFunct
 
     private final BaseMapper<T> baseMapper;
 
+    private SharedString sqlSelect = new SharedString();
+
     public CustomerQueryChainWrapper(BaseMapper<T> baseMapper) {
         super();
         this.baseMapper = baseMapper;
         super.wrapperChildren = new LambdaQueryWrapper<>();
+        ReflectUtil.setFieldValue(wrapperChildren, "sqlSelect", this.sqlSelect);
     }
 
     @SafeVarargs
     @Override
     public final CustomerQueryChainWrapper<T> select(SFunction<T, ?>... columns) {
         wrapperChildren.select(columns);
+        return typedThis;
+    }
+
+    public CustomerQueryChainWrapper<T> selectDistinct(SFunction<T, ?>... columns) {
+        if (ArrayUtils.isNotEmpty(columns)) {
+            this.sqlSelect.setStringValue("distinct " + columnsToString(false, columns));
+        }
         return typedThis;
     }
 
