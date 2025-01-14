@@ -1,6 +1,7 @@
 package com.lvchuan.common.aysnc;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,7 +32,14 @@ public class AsyncHandlerConfig implements CommandLineRunner {
         Map<String, Object> asyncClass = this.applicationContext.getBeansWithAnnotation(AsyncEnable.class);
         for (Map.Entry<String, Object> entry : asyncClass.entrySet()) {
             Class clazz = entry.getValue().getClass();
-            Method[] methods = entry.getValue().getClass().getDeclaredMethods();
+            String className = clazz.getName();
+            if (className.contains("$$")) {
+                //处理代理类
+                Object object = AopProxyUtils.getSingletonTarget(entry.getValue());
+                clazz = object.getClass();
+                className = clazz.getName();
+            }
+            Method[] methods = clazz.getDeclaredMethods();
             List<String> methodList = new ArrayList<>();
             Map<String, AsyncDTO> methodDtoMap = new HashMap<>();
             for (Method method: methods) {
@@ -45,7 +53,7 @@ public class AsyncHandlerConfig implements CommandLineRunner {
                 asyncDTO.setValue(asyncEnable.value());
                 methodDtoMap.put(method.getName(), asyncDTO);
             }
-            AsyncProxyUtil.asyncMethod.put(clazz.getName(), methodDtoMap);
+            AsyncProxyUtil.asyncMethod.put(className, methodDtoMap);
         }
     }
 
