@@ -2,6 +2,7 @@ package com.lvchuan.config;
 
 import com.lvchuan.common.exception.BusinessException;
 import com.lvchuan.common.web.CommonResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description: 统一反参

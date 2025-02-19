@@ -16,7 +16,6 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 @Service
 @AsyncEnable
 public class LogService {
-    @Resource
+    @Autowired
     private AsyncProxyUtil asyncProxyUtil;
 
     private final static int LIMIT_SIZE = 20000;

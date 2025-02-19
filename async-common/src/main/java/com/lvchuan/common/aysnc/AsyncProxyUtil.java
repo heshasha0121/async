@@ -13,7 +13,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -26,7 +25,7 @@ import java.util.*;
 public class AsyncProxyUtil implements MethodInterceptor {
     public static Map<String, Map<String, AsyncDTO>> asyncMethod = new HashMap<>();
 
-    @Resource
+    @Autowired
     private AsyncSendHandler asyncSendHandler;
     @Autowired
     private ApplicationContext applicationContext;

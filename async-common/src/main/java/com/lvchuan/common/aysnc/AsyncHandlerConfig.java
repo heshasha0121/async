@@ -2,6 +2,7 @@ package com.lvchuan.common.aysnc;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -9,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Slf4j
 @ConditionalOnProperty(value = "async.handle", havingValue = "true", matchIfMissing = true)
 public class AsyncHandlerConfig implements CommandLineRunner {
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
     @Override
     public void run(String... args) throws Exception {

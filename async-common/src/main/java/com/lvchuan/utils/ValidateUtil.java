@@ -1,8 +1,6 @@
 package com.lvchuan.utils;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,8 +18,9 @@ public class ValidateUtil {
      * @return
      */
     public static <T> List<String> valid(T t){
-        Validator validatorFactory = Validation.buildDefaultValidatorFactory().getValidator();
+        /*Validator validatorFactory = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<T>> errors = validatorFactory.validate(t);
-        return errors.stream().map(error -> error.getMessage()).collect(Collectors.toList());
+        return errors.stream().map(error -> error.getMessage()).collect(Collectors.toList());*/
+        return null;
     }
 }

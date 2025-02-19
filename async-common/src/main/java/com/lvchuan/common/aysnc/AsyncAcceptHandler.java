@@ -7,12 +7,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -24,9 +24,9 @@ import java.util.*;
  */
 @Slf4j
 public class AsyncAcceptHandler {
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
-    @Resource
+    @Autowired
     private ObjectMapper objectMapper;
 
     /**

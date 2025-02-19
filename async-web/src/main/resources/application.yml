@@ -2,6 +2,8 @@ server:
   port: 20703
   servlet:
     context-path: /async
+  netty:
+    connection-timeout: 500000
 
 spring:
   application:
@@ -12,6 +14,11 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 100MB
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:1.5b
 
 rocketmq:
   name-server: 127.0.0.1:9876 # 访问地址

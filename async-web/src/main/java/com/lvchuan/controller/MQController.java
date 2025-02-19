@@ -13,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 
 /**
  * @description: mq
@@ -25,14 +24,14 @@ import javax.annotation.Resource;
 public class MQController {
     @Autowired
     private MQProducerService mqProducerService;
-    @Resource
+    @Autowired
     private AsyncProxyUtil asyncProxyUtil;
     @PostMapping("/send")
     public void test(@RequestBody Object msg) {
         mqProducerService.sendCommon(JSON.toJSONString(msg));
     }
 
-    @Resource
+    @Autowired
     private TestService testService;
 
     @PostMapping("/sendTest")

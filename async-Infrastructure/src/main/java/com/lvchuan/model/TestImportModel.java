@@ -1,10 +1,9 @@
 package com.lvchuan.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * @description: 测试导入参数

@@ -4,11 +4,11 @@ import cn.hutool.core.collection.CollUtil;
 import com.lvchuan.common.log.ILogDescHandler;
 import com.lvchuan.common.log.LogFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ import java.util.Map;
 @Configuration
 @Slf4j
 public class LogDescHandleConfig implements CommandLineRunner {
-    @Resource
+    @Autowired
     private ApplicationContext applicationContext;
 
     @Override

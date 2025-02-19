@@ -3,9 +3,9 @@ package com.lvchuan.utils;
 import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.net.SocketTimeoutException;
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class OkhttpUtils {
 
     public static final MediaType XML = MediaType.get("text/xml");
 
-    @Resource
+    @Autowired
     private OkHttpClient okHttpClient;
 
     public String post(String url, String json) {

@@ -19,9 +19,9 @@ public class OkHttpConfig {
     /**
      * 保持连接时间
      */
-    private static final long KEEP_ALIVE_TIME = 5000L;
+    private static final long KEEP_ALIVE_TIME = 100 * 50000L;
 
-    private static final long TIMEOUT = 60000L;
+    private static final long TIMEOUT = 100 * 60000L;
 
     @Bean
     public OkHttpClient okHttpClient() {

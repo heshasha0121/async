@@ -5,11 +5,10 @@ import com.lvchuan.model.AIChatReq;
 import com.lvchuan.model.ai.coze.AdditionalMessages;
 import com.lvchuan.model.ai.coze.Body;
 import com.lvchuan.utils.OkhttpUtils;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Map;
 @Component
 @Slf4j
 public class CozeAppService implements IAIService{
-    @Resource
+    @Autowired
     private OkhttpUtils okhttpUtils;
 
     private static final String chat_url = "https://api.coze.cn/v3/chat";

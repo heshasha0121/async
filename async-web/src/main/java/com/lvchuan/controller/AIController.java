@@ -1,14 +1,19 @@
 package com.lvchuan.controller;
 
 import com.lvchuan.model.AIChatReq;
+import com.lvchuan.service.ai.DeepSeekAppService;
 import com.lvchuan.service.ai.IAIService;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * @description: ai api接口
@@ -18,11 +23,21 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/ai")
 public class AIController {
-    @Resource
+    @Autowired
     private IAIService aiService;
+
+    @Autowired
+    private ChatClient chatClient;
 
     @PostMapping("/chasMsg")
     public String chasMsg(@RequestBody @Validated AIChatReq data) {
         return aiService.chasMsg(data);
+    }
+
+    //聊天
+    @PostMapping("/chat")
+    public String chat(@RequestBody AIChatReq param){
+        //直接返回
+        return chatClient.prompt(param.getMsg()).call().content();
     }
 }

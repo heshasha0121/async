@@ -5,7 +5,7 @@ import com.lvchuan.common.enums.BaseEnumDeserializer;
 import com.lvchuan.export.ExportTemplateBizTypeEnum;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @description: 导入

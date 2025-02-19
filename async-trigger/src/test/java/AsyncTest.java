@@ -3,10 +3,10 @@ import com.lvchuan.common.aysnc.AsyncProxyUtil;
 import com.lvchuan.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 
 /**
  * @description: 异步测试
@@ -16,9 +16,9 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = TriggerMain.class)
 public class AsyncTest {
-    @Resource
+    @Autowired
     private AsyncProxyUtil asyncProxyUtil;
-    @Resource
+    @Autowired
     private TestService testService;
 
     @Test
