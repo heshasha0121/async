@@ -1,19 +1,14 @@
 package com.lvchuan.controller;
 
 import com.lvchuan.model.AIChatReq;
-import com.lvchuan.service.ai.DeepSeekAppService;
+import com.lvchuan.model.ai.deepseek.DeepSeekBeanOutputConverter;
+import com.lvchuan.model.ai.deepseek.DeepSeekResponse;
 import com.lvchuan.service.ai.IAIService;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
-import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 /**
  * @description: ai api接口
@@ -36,8 +31,11 @@ public class AIController {
 
     //聊天
     @PostMapping("/chat")
-    public String chat(@RequestBody AIChatReq param){
+    public DeepSeekResponse chat(@RequestBody AIChatReq param){
         //直接返回
-        return chatClient.prompt(param.getMsg()).call().content();
+        DeepSeekBeanOutputConverter deepSeekBeanOutputConverter = new DeepSeekBeanOutputConverter<>(DeepSeekResponse.class);
+        return (DeepSeekResponse) chatClient.prompt(param.getMsg())
+                .call()
+                .entity(deepSeekBeanOutputConverter);
     }
 }

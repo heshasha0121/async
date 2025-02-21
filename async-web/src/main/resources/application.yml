@@ -19,6 +19,10 @@ spring:
       base-url: http://localhost:11434
       chat:
         model: deepseek-r1:1.5b
+    openai:
+      chat:
+        options:
+          response-format: json
 
 rocketmq:
   name-server: 127.0.0.1:9876 # 访问地址
