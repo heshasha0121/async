@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author lvchuan
@@ -25,15 +26,21 @@ import java.util.*;
 public class AsyncProxyUtil implements MethodInterceptor {
     public static Map<String, Map<String, AsyncDTO>> asyncMethod = new HashMap<>();
 
+    private static final ConcurrentHashMap<Class<?>, Enhancer> enhancerCache = new ConcurrentHashMap<>();
+
     @Autowired
     private AsyncSendHandler asyncSendHandler;
     @Autowired
     private ApplicationContext applicationContext;
 
     public <T> T proxy(T t) {
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(t.getClass());
-        enhancer.setCallback(this);
+        Class targetClass = t.getClass();
+        Enhancer enhancer = enhancerCache.computeIfAbsent(targetClass, clazz -> {
+            Enhancer e = new Enhancer();
+            e.setSuperclass(clazz);
+            e.setCallback(this);
+            return e;
+        });
         return (T) enhancer.create();
     }
 
